@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>fnm</id>
+    <title>Fast and simple Node.js version manager, built in Rust</title>
+    <version>0.1.0</version>
+    <authors>Gal Schlezinger</authors>
+    <owners>Chris Meagher</owners>
+    <summary>fnm is a cross-platform, single file, instant startup, Node.js version manager built with speed in mind</summary>
+    <description>Fast Node Manager (fnm) is a fast and simple Node.js version manager, built in Rust</description>
+    <projectUrl>https://github.com/Schniz/fnm</projectUrl>
+    <tags>nodejs javascript nvm version cross-platform cli</tags>
+    <copyright>Gal Schlezinger</copyright>
+    <licenseUrl>https://raw.githubusercontent.com/Schniz/fnm/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>https://github.com/Schniz/fnm/blob/master/CHANGELOG.md</releaseNotes>
+    <docsUrl>https://github.com/Schniz/fnm/blob/master/README.md</docsUrl>
+    <bugTrackerUrl>https://github.com/Schniz/fnm/issues</bugTrackerUrl>
+    <projectSourceUrl>https://github.com/Schniz/fnm</projectSourceUrl>
+    <packageSourceUrl>https://github.com/CMeeg/fnm-chocolatey/tree/main/fnm</packageSourceUrl>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <file src="legal\**" target="legal" />
+  </files>
+</package>
