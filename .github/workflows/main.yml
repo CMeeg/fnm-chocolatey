@@ -1,0 +1,88 @@
+# This workflow looks for the latest version of fnm and if the version does not match the latest package version on Chocolatey it will package it and publish it
+
+name: Update
+
+on:
+  # Every day of the week from Monday to Friday at 2:00 UTC
+  # TODO: cron syntax - run every day
+  # schedule:
+  # - cron: "0 2 * * 1-5"
+
+  # Allow running manually
+  workflow_dispatch:
+
+jobs:
+  # Try to find and create an updated package
+  package:
+    runs-on: windows-latest
+    outputs:
+      updated: ${{ steps.update-package.outputs.updated }}
+      version: ${{ steps.update-package.outputs.version }}
+
+    steps:
+      # Check-out repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v2
+
+      # Install Chocolatey AU module
+      - name: Install AU
+        run: choco install au -y
+        shell: powershell
+
+      # Run the AU update command
+      - name: Run AU update
+        id: update-package
+        run: |
+          $result = .\update.ps1
+          echo "::set-output name=updated::$($result.Updated)"
+          echo "::set-output name=version::$($result.RemoteVersion)"
+        working-directory: ./fnm
+        shell: powershell
+
+      # If there is an update then commit changes to repo
+      - name: Commit update
+        if: ${{ steps.update-package.outputs.updated == 'True' }}
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -am "Update to latest release"
+          git push
+
+      # If there is an update then upload any resulting nupkg as an artifact
+      - name: Upload nupkg artifact
+        uses: actions/upload-artifact@v2
+        if: ${{ steps.update-package.outputs.updated == 'True' }}
+        with:
+          name: nupkg
+          path: ./fnm/*.nupkg
+          if-no-files-found: error
+
+  # If there is an updated package then publish it
+  publish:
+    needs: package
+    if: ${{ needs.package.outputs.updated == 'True' }}
+    runs-on: windows-latest
+
+    steps:
+      - name: Download nupkg artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: nupkg
+
+      # Publish to Chocolatey feed
+      - name: Push to Chocolatey
+        env:
+          CHOCO_API_KEY: ${{ secrets.CHOCO_API_KEY }}
+        run: |
+          choco apikey -k "$env:CHOCO_API_KEY" -source https://push.chocolatey.org/
+          choco push -s https://push.chocolatey.org/
+        shell: pwsh
+
+      # Push to GitHub releases
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v0.1.12
+        with:
+          tag_name: ${{ needs.package.outputs.version }}
+          body: 'Automatic update from latest fnm release.'
+          files: |
+            *.nupkg
+          fail_on_unmatched_files: true
