@@ -5,4 +5,4 @@ This project uses the [Chocolatey Automatic Package Updater Module](https://gith
 
 ## Getting started
 
-If you're looking for instructions for installing and using `fnm` via Chocolatey then please visit the [Chocolatey package page]((https://chocolatey.org/packages/fnm)).
+If you're looking for instructions for installing and using `fnm` via Chocolatey then please visit the [Chocolatey package page](https://chocolatey.org/packages/fnm).
