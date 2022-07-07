@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>fnm</id>
-    <title>Fast and simple Node.js version manager, built in Rust</title>
+    <title>fnm - fast and simple Node.js version manager</title>
     <version>1.31.0</version>
     <authors>Gal Schlezinger</authors>
     <owners>Chris Meagher</owners>
