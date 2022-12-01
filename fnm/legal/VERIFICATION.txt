@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x64: https://github.com/Schniz/fnm/releases/download/v1.31.1/fnm-windows.zip
+   x64: https://github.com/Schniz/fnm/releases/download/v1.32.0/fnm-windows.zip
 
    to download the installer.
 
@@ -15,7 +15,7 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum64: 82EB1CE6012B153693C2E825D2F2767E23097BD6F30F7582F3F5FE24EE17D54E
+   checksum64: AC30827829C6AF0A8BC4ECA13033E7BF24413FBAB796CAEE06C7796D260685F8
 
 File 'LICENSE' is obtained from:
    https://raw.githubusercontent.com/Schniz/fnm/master/LICENSE
