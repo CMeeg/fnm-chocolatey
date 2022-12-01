@@ -1,6 +1,8 @@
 import-module au
 
-$releases = 'https://github.com/Schniz/fnm/releases/latest'
+$latestReleaseUrl = 'https://github.com/Schniz/fnm/releases/latest'
+$assetsUrlRegex = 'https.+\/expanded_assets\/(v[0-9\.]+)'
+$windowsZipRegex = 'fnm-windows\.zip$'
 
 function global:au_SearchReplace {
    @{
@@ -18,12 +20,17 @@ function global:au_SearchReplace {
 function global:au_BeforeUpdate { Get-RemoteFiles -Purge }
 
 function global:au_GetLatest {
-    $download_page = Invoke-WebRequest -Uri $releases -UseBasicParsing
+    $latestRelease = Invoke-WebRequest -Uri $latestReleaseUrl -UseBasicParsing
 
-    $re = 'fnm-windows\.zip$'
-    $url = $download_page.links | ? href -match $re | select -First 2 -expand href | % { 'https://github.com' + $_ }
+    $latestRelease.content -match $assetsUrlRegex
 
-    $tag = $url -split '/' | select -Last 1 -Skip 1
+    $assetsUrl = $Matches.0
+
+    $assets = Invoke-WebRequest -Uri $assetsUrl -UseBasicParsing
+
+    $url = $assets.links | Where-Object href -match $windowsZipRegex | Select-Object -First 2 -expand href | ForEach-Object { 'https://github.com' + $_ }
+
+    $tag = $url -split '/' | Select-Object -Last 1 -Skip 1
     $version = $tag.trimstart('v')
 
     @{
