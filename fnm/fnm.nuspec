@@ -3,7 +3,7 @@
   <metadata>
     <id>fnm</id>
     <title>fnm - fast and simple Node.js version manager</title>
-    <version>1.36.0</version>
+    <version>1.37.0</version>
     <authors>Gal Schlezinger</authors>
     <owners>Chris Meagher</owners>
     <summary>fnm is a cross-platform, single file, instant startup, Node.js version manager built with speed in mind</summary>
@@ -35,7 +35,7 @@ Please read the [fnm docs](https://github.com/Schniz/fnm#usage) for a full usage
     <copyright>Gal Schlezinger</copyright>
     <licenseUrl>https://raw.githubusercontent.com/Schniz/fnm/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>https://github.com/Schniz/fnm/releases/tag/v1.36.0</releaseNotes>
+    <releaseNotes>https://github.com/Schniz/fnm/releases/tag/v1.37.0</releaseNotes>
     <docsUrl>https://github.com/Schniz/fnm/blob/master/README.md</docsUrl>
     <bugTrackerUrl>https://github.com/Schniz/fnm/issues</bugTrackerUrl>
     <projectSourceUrl>https://github.com/Schniz/fnm</projectSourceUrl>
