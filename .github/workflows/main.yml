@@ -48,7 +48,7 @@ jobs:
 
       # If there is an update then upload any resulting nupkg as an artifact
       - name: Upload nupkg artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: ${{ steps.update-package.outputs.updated == 'True' }}
         with:
           name: nupkg
@@ -63,7 +63,7 @@ jobs:
 
     steps:
       - name: Download nupkg artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: nupkg
 
